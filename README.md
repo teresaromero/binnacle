@@ -14,6 +14,16 @@ From a product perspective, the purpose of this project is to MVP a simple app t
 
 From a dev perspective, the purpose is to have a side-project where to find, experiment and learn.
 
+## Tech
+
+### Server
+
+Binnacle server is aim to be a gRPC server serving multiple services, as i wanted to explore gRPC implementation.
+
+First "challenge" to solve would be to have a common `proto` repository where to store the definition of the services, so in the "near" future i can share them between server an client. For the time being this "repository" will be a folder on the repo and some `make` commands to control the protobuf generation.
+
+The gRPC server is enabled with `reflection` as i will be using Postman to test the API and i want the services to load from the source, instead of importing a file. 
+
 ## License
 
 [MIT](https://choosealicense.com/licenses/mit/)
