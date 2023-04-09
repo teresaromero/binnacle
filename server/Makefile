@@ -1,7 +1,7 @@
-API_BIN=bin/binnacle-api
+API_BIN=bin/binnacle-server
 
 build:
-	go build -o ${API_BIN} .
+	CGO_ENABLED=0 go build -o ${API_BIN} .
 
 test:
 	go test -v .
@@ -12,4 +12,3 @@ run-bin: build
 clean:
 	go clean
 	rm -rf ${API_BIN}
-
