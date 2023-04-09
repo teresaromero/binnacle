@@ -1,0 +1,13 @@
+version: '2'
+services:
+  server:
+    build: ./server
+    ports:
+      - "8080:8080"
+    command: ["./binnacle-server", "--port=:8080"]
+    healthcheck:
+      test: ["CMD", "./grpc_health_probe", "-addr=:8080"]
+      interval: 1m30s
+      timeout: 30s
+      retries: 5
+      start_period: 30s
