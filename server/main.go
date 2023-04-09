@@ -16,6 +16,18 @@ const (
 	defaultPort = ":8080"
 )
 
+type tripServer struct {
+	pb.UnimplementedTripServiceServer
+}
+
+func (s tripServer) CreateTrip(ctx context.Context, in *pb.NewTrip) (*pb.Trip, error) {
+	return &pb.Trip{
+		Id:          "1",
+		Name:        in.Name,
+		Description: in.Description,
+	}, nil
+}
+
 type healthChecker struct{}
 
 func (h healthChecker) Check(ctx context.Context, in *grpc_health_v1.HealthCheckRequest) (*grpc_health_v1.HealthCheckResponse, error) {
@@ -45,6 +57,8 @@ func main() {
 	}
 
 	s := grpc.NewServer()
+	pb.RegisterTripServiceServer(s, tripServer{})
+
 	grpc_health_v1.RegisterHealthServer(s, healthChecker{})
 	reflection.Register(s)
 
